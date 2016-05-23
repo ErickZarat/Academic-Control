@@ -13,4 +13,6 @@
     <string name="opcion_1">Option 1</string>
     <string name="opcion_2">Option 2</string>
     <string name="action_search">Search</string>
+    <string name="student_nav">Students</string>
+    <string name="teacher_nav">Teacher</string>
 </resources>

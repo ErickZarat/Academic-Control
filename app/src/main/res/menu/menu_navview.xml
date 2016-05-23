@@ -2,6 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/menu_student"
+            android:icon="@mipmap/ic_student_menu"
+            android:title="@string/student_nav" />
+        <item
+            android:id="@+id/menu_teacher"
+            android:icon="@mipmap/ic_student_menu"
+            android:title="@string/teacher_nav" />
+        <item
             android:id="@+id/menu_seccion_1"
             android:icon="@drawable/ic_menu"
             android:title="@string/seccion_1"/>

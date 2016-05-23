@@ -19,6 +19,8 @@ import org.erickzarat.academiccontrol.R;
 import org.erickzarat.academiccontrol.fragment.Fragment1;
 import org.erickzarat.academiccontrol.fragment.Fragment2;
 import org.erickzarat.academiccontrol.fragment.Fragment3;
+import org.erickzarat.academiccontrol.fragment.StudentFragment;
+import org.erickzarat.academiccontrol.fragment.TeacherFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -91,6 +93,14 @@ public class MainActivity extends AppCompatActivity {
                                 break;
                             case R.id.menu_opcion_2:
                                 Toast.makeText(getApplicationContext(), "Option 2 pressed", Toast.LENGTH_SHORT).show();
+                                break;
+                            case R.id.menu_student:
+                                fragment = new StudentFragment();
+                                fragmentTransaction = true;
+                                break;
+                            case R.id.menu_teacher:
+                                fragment = new TeacherFragment();
+                                fragmentTransaction = true;
                                 break;
                         }
 
