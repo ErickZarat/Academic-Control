@@ -21,6 +21,7 @@ public class TeacherFragment extends Fragment {
         // Inflate the layout for this fragment
         View ViewRoot = inflater.inflate(R.layout.fragment_teacher, container, false);
         Toast.makeText(getContext(), "Teacher Fragment", Toast.LENGTH_SHORT).show();
+
         return ViewRoot;
     }
 }
