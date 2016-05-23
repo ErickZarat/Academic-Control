@@ -11,9 +11,10 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
 import org.erickzarat.academiccontrol.R;
 import org.erickzarat.academiccontrol.fragment.Fragment1;
 import org.erickzarat.academiccontrol.fragment.Fragment2;
@@ -86,10 +87,10 @@ public class MainActivity extends AppCompatActivity {
                                 fragmentTransaction = true;
                                 break;
                             case R.id.menu_opcion_1:
-                                Log.i("NavigationView", "Pulsada opción 1");
+                                Toast.makeText(getApplicationContext(), "Option 1 pressed", Toast.LENGTH_SHORT).show();
                                 break;
                             case R.id.menu_opcion_2:
-                                Log.i("NavigationView", "Pulsada opción 2");
+                                Toast.makeText(getApplicationContext(), "Option 2 pressed", Toast.LENGTH_SHORT).show();
                                 break;
                         }
 
