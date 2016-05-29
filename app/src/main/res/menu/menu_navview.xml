@@ -10,17 +10,13 @@
             android:icon="@mipmap/ic_student_menu"
             android:title="@string/teacher_nav" />
         <item
-            android:id="@+id/menu_seccion_1"
+            android:id="@+id/menu_grades"
             android:icon="@drawable/ic_menu"
             android:title="@string/seccion_1"/>
         <item
-            android:id="@+id/menu_seccion_2"
+            android:id="@+id/menu_plan"
             android:icon="@drawable/ic_menu"
             android:title="@string/seccion_2"/>
-        <item
-            android:id="@+id/menu_seccion_3"
-            android:icon="@drawable/ic_menu"
-            android:title="@string/seccion_3"/>
     </group>
 
     <item
@@ -28,13 +24,13 @@
         android:title="@string/otras_opciones">
         <menu>
             <item
-                android:id="@+id/menu_opcion_1"
-                android:icon="@drawable/ic_menu"
-                android:title="@string/opcion_1"/>
+                android:id="@+id/menu_reg_option"
+                android:icon="@mipmap/ic_reg_user"
+                android:title="@string/reg_usr" />
             <item
-                android:id="@+id/menu_opcion_2"
-                android:icon="@drawable/ic_menu"
-                android:title="@string/opcion_2"/>
+                android:id="@+id/menu_login_option"
+                android:icon="@mipmap/ic_login_option"
+                android:title="@string/login_option_menu" />
         </menu>
     </item>
 </menu>

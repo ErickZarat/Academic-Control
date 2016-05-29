@@ -4,6 +4,7 @@ package org.erickzarat.academiccontrol.activity;
  * Created by erick on 21/05/16.
  */
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -13,12 +14,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import org.erickzarat.academiccontrol.R;
-import org.erickzarat.academiccontrol.fragment.Fragment1;
-import org.erickzarat.academiccontrol.fragment.Fragment2;
-import org.erickzarat.academiccontrol.fragment.Fragment3;
 import org.erickzarat.academiccontrol.fragment.StudentFragment;
 import org.erickzarat.academiccontrol.fragment.TeacherFragment;
 
@@ -28,10 +25,12 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private NavigationView navView;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         appbar = (Toolbar)findViewById(R.id.appbar);
         setSupportActionBar(appbar);
@@ -76,23 +75,13 @@ public class MainActivity extends AppCompatActivity {
                         Fragment fragment = null;
 
                         switch (menuItem.getItemId()) {
-                            case R.id.menu_seccion_1:
-                                fragment = new Fragment1();
+                            case R.id.menu_plan:
+                                //fragment = new Fragment1();
                                 fragmentTransaction = true;
                                 break;
-                            case R.id.menu_seccion_2:
-                                fragment = new Fragment2();
+                            case R.id.menu_grades:
+                                //fragment = new Fragment2();
                                 fragmentTransaction = true;
-                                break;
-                            case R.id.menu_seccion_3:
-                                fragment = new Fragment3();
-                                fragmentTransaction = true;
-                                break;
-                            case R.id.menu_opcion_1:
-                                Toast.makeText(getApplicationContext(), "Option 1 pressed", Toast.LENGTH_SHORT).show();
-                                break;
-                            case R.id.menu_opcion_2:
-                                Toast.makeText(getApplicationContext(), "Option 2 pressed", Toast.LENGTH_SHORT).show();
                                 break;
                             case R.id.menu_student:
                                 fragment = new StudentFragment();
@@ -101,6 +90,16 @@ public class MainActivity extends AppCompatActivity {
                             case R.id.menu_teacher:
                                 fragment = new TeacherFragment();
                                 fragmentTransaction = true;
+                                break;
+                            case R.id.menu_reg_option:
+                                Intent i = new Intent(MainActivity.this, UserRegistrationActivity.class);
+                                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(i);
+                                break;
+                            case R.id.menu_login_option:
+                                Intent in = new Intent(MainActivity.this, LoginActivity.class);
+                                in.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(in);
                                 break;
                         }
 

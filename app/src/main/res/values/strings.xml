@@ -17,4 +17,12 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="student_nav">Students</string>
     <string name="teacher_nav">Teacher</string>
+    <string name="reg_usr">User Registration</string>
+    <string name="first_name_hint">First Name</string>
+    <string name="second_name_hint">Second Name</string>
+    <string name="nick_hint">Nick</string>
+    <string name="contrasena_hint">Password</string>
+    <string name="sign_in">Sign In</string>
+    <string name="login_option_menu">Sign In</string>
+    <string name="save_action">Save</string>
 </resources>
