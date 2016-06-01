@@ -57,6 +57,7 @@ public class TeacherFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
         personas = new ArrayList<>();
         swipeListAdapter = new SwipeListAdapter(this.getActivity(), personas);
+        listViewPersonas.setDivider(this.getResources().getDrawable(R.drawable.transperent_color));
         swipeRefreshLayout = (SwipeRefreshLayout) ViewRoot.findViewById(R.id.swipe_refresh_layout);
         listViewPersonas.setAdapter(swipeListAdapter);
 

@@ -61,6 +61,13 @@ public class SwipeListAdapter extends BaseAdapter {
         tvIdPersona.setText(String.valueOf(personas.get(position).getIdUsuario()));
         tvName.setText(personas.get(position).getNombre());
 
+        view.findViewById(R.id.card_user).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
         return view;
     }
 }

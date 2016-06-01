@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import org.erickzarat.academiccontrol.R;
 import org.erickzarat.academiccontrol.fragment.StudentFragment;
 import org.erickzarat.academiccontrol.fragment.TeacherFragment;
+import org.erickzarat.academiccontrol.fragment.UserFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -75,8 +76,8 @@ public class MainActivity extends AppCompatActivity {
                         Fragment fragment = null;
 
                         switch (menuItem.getItemId()) {
-                            case R.id.menu_plan:
-                                //fragment = new Fragment1();
+                            case R.id.menu_users:
+                                fragment = new UserFragment();
                                 fragmentTransaction = true;
                                 break;
                             case R.id.menu_grades:
@@ -117,6 +118,14 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     }
                 });
+    }
+
+    public void replaceFragment(Fragment fragment, String title){
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.frame_navigation, fragment)
+                .commit();
+
+        getSupportActionBar().setTitle(title);
     }
 
     @Override
