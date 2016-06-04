@@ -1,26 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- APP STRINGS -->
     <string name="app_name">Control Academico</string>
-    <string name="fragment1">Fragment 1</string>
-    <string name="fragment2">Fragment 2</string>
-    <string name="fragment3">Fragment 3</string>
-    <string name="usuario">Usuario</string>
-    <string name="action_settings">Settings</string>
-    <string name="seccion_1">Section 1</string>
-    <string name="seccion_2">Section 2</string>
-    <string name="seccion_3">Section 3</string>
-    <string name="otras_opciones">other options</string>
-    <string name="opcion_1">Option 1</string>
-    <string name="opcion_2">Option 2</string>
-    <string name="action_search">Search</string>
-    <string name="student_nav">Students</string>
-    <string name="teacher_nav">Teacher</string>
-    <string name="reg_usr">User Registration</string>
-    <string name="first_name_hint">First Name</string>
-    <string name="second_name_hint">Second Name</string>
-    <string name="nick_hint">Nick</string>
-    <string name="contrasena_hint">Password</string>
-    <string name="sign_in">Sign In</string>
-    <string name="login_option_menu">Sign In</string>
-    <string name="save_action">Save</string>
+
+    <!-- NAVIGATION VIEW OPTION STRINGS -->
+    <string name="nav.header">Control Academico</string>
+    <string name="nav.option.other">Otras Opciones</string>
+    <string name="nav.option.student">Alumnos</string>
+    <string name="nav.option.teacher">Profesores</string>
+    <string name="nav.option.signin">Login</string>
+    <string name="nav.option.grades">Notas</string>
+	<string name="nav.option.people">Personas</string>
+
+    <!-- TOOLBAR OPTIONS MENU STRINGS -->
+    <string name="menu.action.settings">Ajustes</string>
+    <string name="menu.action.search">Buscar</string>
+    <string name="menu.action.save">Guardar</string>
+
+    <!-- REGISTRATION USER STRINGS -->
+    <string name="register.first.name.hint">Nombre</string>
+    <string name="register.second.name.hint">Apellido</string>
+    <string name="register.nick.hint">Nombre de Usuario</string>
+    <string name="register.password.hint">Contrasena</string>
+    <string name="register.title">Registro de Usuario</string>
+    <string name="register.role.hint">Rol</string>
+
+    <!-- LOGIN OPTION STRINGS -->
+    <string name="login.option.register">Registrarse</string>
+    <string name="login.option.signin">Iniciar Sesion</string>
+	<string name="nav.option.plan">Plan</string>
+
+
 </resources>

@@ -6,22 +6,24 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.Toast;
-
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.sergiocasero.revealfab.RevealFAB;
-
 import org.erickzarat.academiccontrol.R;
 import org.erickzarat.academiccontrol.activity.UserRegistrationActivity;
-import org.erickzarat.academiccontrol.adapter.SwipeListAdapter;
+import org.erickzarat.academiccontrol.adapter.PeopleRecycleAdapter;
 import org.erickzarat.academiccontrol.app.Aplication;
+import org.erickzarat.academiccontrol.model.Profesor;
 import org.erickzarat.academiccontrol.model.Rol;
 import org.erickzarat.academiccontrol.model.Usuario;
 import org.json.JSONArray;
@@ -33,15 +35,19 @@ import java.util.List;
 
 public class TeacherFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
+    @Bind(R.id.recycle_teachers)
+    RecyclerView recycleTeachers;
+    @Bind(R.id.swipe_refresh_layout)
+    SwipeRefreshLayout swipeRefreshLayout;
+    @Bind(R.id.fabNewTeacher)
+    RevealFAB fabNewTeacher;
+
     //api request elements
     private String TAG = StudentFragment.class.getSimpleName();
-    private String URL = "http://academiccontrol-64005.onmodulus.net/api/profesor";
+    private String URL = "http://192.168.64.13:3000/api/profesor";
 
-    private SwipeRefreshLayout swipeRefreshLayout;
-    private ListView listViewPersonas;
-    private SwipeListAdapter swipeListAdapter;
-    private List<Usuario> personas;
-    private RevealFAB mBtnAdd;
+    private List<Usuario> teachers;
+    PeopleRecycleAdapter adapter;
 
     public TeacherFragment() {
     }
@@ -50,55 +56,61 @@ public class TeacherFragment extends Fragment implements SwipeRefreshLayout.OnRe
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View ViewRoot = inflater.inflate(R.layout.fragment_teacher, container, false);
-        Toast.makeText(getContext(), "Teacher Fragment", Toast.LENGTH_SHORT).show();
+        View view = inflater.inflate(R.layout.fragment_teacher, container, false);
+        ButterKnife.bind(this, view);
 
-        listViewPersonas = (ListView) ViewRoot.findViewById(R.id.listViewPersonas);
+        teachers = new ArrayList<Usuario>();
+        initAdapter();
+        initRecyclerView();
 
-        personas = new ArrayList<>();
-        swipeListAdapter = new SwipeListAdapter(this.getActivity(), personas);
-        listViewPersonas.setDivider(this.getResources().getDrawable(R.drawable.transperent_color));
-        swipeRefreshLayout = (SwipeRefreshLayout) ViewRoot.findViewById(R.id.swipe_refresh_layout);
-        listViewPersonas.setAdapter(swipeListAdapter);
-
-        swipeRefreshLayout.setOnRefreshListener(this);
-
-        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary, R.color.colorAccent);
-
-        swipeRefreshLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                swipeRefreshLayout.setRefreshing(true);
-                getPersonas();
-            }
-        });
-
-        mBtnAdd = (RevealFAB) ViewRoot.findViewById(R.id.fabNewTeacher);
+        fabNewTeacher = (RevealFAB) view.findViewById(R.id.fabNewTeacher);
         Intent i = new Intent(this.getActivity(), UserRegistrationActivity.class);
         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         i.putExtra("ROL", new Rol().getProfesor());
-        mBtnAdd.setIntent(i);
-        ;
+        fabNewTeacher.setIntent(i);
 
-        mBtnAdd.setOnClickListener(new RevealFAB.OnClickListener() {
+        fabNewTeacher.setOnClickListener(new RevealFAB.OnClickListener() {
             @Override
             public void onClick(RevealFAB button, View v) {
                 button.startActivityWithAnimation();
             }
         });
 
-        return ViewRoot;
+
+        return view;
+    }
+
+    private void initRecyclerView() {
+        recycleTeachers.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recycleTeachers.setAdapter(adapter);
+        swipeRefreshLayout.setOnRefreshListener(this);
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary, R.color.colorAccent);
+
+        swipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                swipeRefreshLayout.setRefreshing(true);
+                adapter.clear();
+                getPersonas();
+            }
+        });
+    }
+
+    private void initAdapter() {
+        if (adapter == null){
+            adapter = new PeopleRecycleAdapter(getActivity().getApplicationContext(), teachers);
+        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        mBtnAdd.onResume();
+        fabNewTeacher.onResume();
     }
 
     @Override
     public void onRefresh() {
-        personas.clear();
+        teachers.clear();
         getPersonas();
     }
 
@@ -129,6 +141,7 @@ public class TeacherFragment extends Fragment implements SwipeRefreshLayout.OnRe
             @Override
             public void onResponse(JSONArray response) {
                 if (response.length() > 0) {
+                    ArrayList<Usuario> temp = new ArrayList<Usuario>();
                     for (int i = 0; i < response.length(); i++) {
                         try {
                             JSONObject personaJson = response.getJSONObject(i);
@@ -141,14 +154,18 @@ public class TeacherFragment extends Fragment implements SwipeRefreshLayout.OnRe
                             persona.setIdUsuario(idPersona);
                             persona.setNombre(name);
                             persona.setApellido(email);
-                            personas.add(0, persona);
+                            temp.add(0, persona);
 
                         } catch (JSONException ex) {
                             Log.e(TAG, "Json parsing error: " + ex.getMessage());
                         }//end try catch
                     }// end for
-                    swipeListAdapter.notifyDataSetChanged();
-                }//end if
+                    teachers.clear();
+                    adapter.update(temp);
+                    teachers = temp;
+                } else {
+                    Toast.makeText(getActivity().getApplicationContext(), "No existen registros de profesores", Toast.LENGTH_LONG).show();
+                }
                 swipeRefreshLayout.setRefreshing(false);
                 //end on response ();
             }
@@ -162,5 +179,11 @@ public class TeacherFragment extends Fragment implements SwipeRefreshLayout.OnRe
         });
 
         Aplication.getInstance(this.getContext()).addToRequestQueue(peticion);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
     }
 }

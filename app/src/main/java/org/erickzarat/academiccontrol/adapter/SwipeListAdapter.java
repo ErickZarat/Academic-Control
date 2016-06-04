@@ -52,7 +52,7 @@ public class SwipeListAdapter extends BaseAdapter {
         }
 
         if (view == null) {
-            view = inflater.inflate(R.layout.list_row, null);
+            view = inflater.inflate(R.layout.people_item_row, null);
         }
 
         TextView tvIdPersona = (TextView) view.findViewById(R.id.tvIdPersona);

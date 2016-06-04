@@ -9,12 +9,12 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent">
 
-        <ListView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/listViewPersonas">
+	    <android.support.v7.widget.RecyclerView
+		    android:layout_height="match_parent"
+		    android:layout_width="match_parent"
+		    android:id="@+id/recycle_students">
 
-        </ListView>
+	    </android.support.v7.widget.RecyclerView>
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
@@ -26,7 +26,7 @@
         app:fab_icon="@mipmap/ic_reg_user"
         app:reveal_color="@color/colorAccent"
         app:elevation="6dp"
-        app:pressedTranslationZ="12dp" />
+        app:pressedTranslationZ="12dp"/>
 
 </RelativeLayout>
 

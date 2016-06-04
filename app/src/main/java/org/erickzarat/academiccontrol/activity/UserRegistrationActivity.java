@@ -130,7 +130,7 @@ public class UserRegistrationActivity extends AppCompatActivity {
         usr.put("contrasena", usuario.getContrasena());
         usr.put("idRol", "" + usuario.getRol().getIdRol());
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, WebService.usuarios, new JSONObject(usr), new Response.Listener<JSONObject>() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, "http://192.168.1.100:3000/api/usuario", new JSONObject(usr), new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {

@@ -16,8 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import org.erickzarat.academiccontrol.R;
-import org.erickzarat.academiccontrol.fragment.StudentFragment;
-import org.erickzarat.academiccontrol.fragment.TeacherFragment;
+import org.erickzarat.academiccontrol.fragment.GradeFragment;
 import org.erickzarat.academiccontrol.fragment.UserFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -81,21 +80,8 @@ public class MainActivity extends AppCompatActivity {
                                 fragmentTransaction = true;
                                 break;
                             case R.id.menu_grades:
-                                //fragment = new Fragment2();
+                                fragment = new GradeFragment();
                                 fragmentTransaction = true;
-                                break;
-                            case R.id.menu_student:
-                                fragment = new StudentFragment();
-                                fragmentTransaction = true;
-                                break;
-                            case R.id.menu_teacher:
-                                fragment = new TeacherFragment();
-                                fragmentTransaction = true;
-                                break;
-                            case R.id.menu_reg_option:
-                                Intent i = new Intent(MainActivity.this, UserRegistrationActivity.class);
-                                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(i);
                                 break;
                             case R.id.menu_login_option:
                                 Intent in = new Intent(MainActivity.this, LoginActivity.class);
@@ -105,12 +91,8 @@ public class MainActivity extends AppCompatActivity {
                         }
 
                         if(fragmentTransaction) {
-                            getSupportFragmentManager().beginTransaction()
-                                    .replace(R.id.content_frame, fragment)
-                                    .commit();
-
+                            transacFragment(fragment,menuItem.getTitle().toString());
                             menuItem.setChecked(true);
-                            getSupportActionBar().setTitle(menuItem.getTitle());
                         }
 
                         drawerLayout.closeDrawers();
@@ -118,6 +100,13 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     }
                 });
+    }
+
+    public void transacFragment(Fragment fragment, String title){
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.content_frame, fragment)
+                .commit();
+        getSupportActionBar().setTitle(title);
     }
 
     public void replaceFragment(Fragment fragment, String title){

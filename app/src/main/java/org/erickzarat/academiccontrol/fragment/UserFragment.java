@@ -36,8 +36,8 @@ public class UserFragment extends Fragment {
 
         AHBottomNavigation bottomNavigation = (AHBottomNavigation) rootView.findViewById(R.id.bottom_navigation);
 
-        AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.teacher_nav, R.mipmap.ic_student_menu, R.color.nav_color1);
-        AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.student_nav, R.mipmap.ic_student_menu, R.color.nav_color2);
+        AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.nav_option_teacher, R.mipmap.ic_student_menu, R.color.nav_color1);
+        AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.nav_option_student, R.mipmap.ic_student_menu, R.color.nav_color2);
 
         bottomNavigation.addItem(item1);
         bottomNavigation.addItem(item2);
@@ -50,14 +50,12 @@ public class UserFragment extends Fragment {
         bottomNavigation.setInactiveColor(Color.parseColor("#747474"));
 
         bottomNavigation.setForceTint(false);
-
         bottomNavigation.setForceTitlesDisplay(true);
-
         bottomNavigation.setColored(true);
-
         bottomNavigation.setCurrentItem(0);
-
         bottomNavigation.setNotificationBackgroundColor(Color.parseColor("#FFFFFF"));
+
+        ((MainActivity)getActivity()).replaceFragment(new TeacherFragment(), "Teacher");
 
         bottomNavigation.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
             @Override
@@ -66,17 +64,18 @@ public class UserFragment extends Fragment {
                 RevealFAB fab;
                 if (position == 0){
                     fragment = new TeacherFragment();
-                    title = getString(R.string.teacher_nav);
+                    title = getString(R.string.nav_option_teacher);
                     fab = (RevealFAB) rootView.findViewById(R.id.fabNewTeacher);
                     fragmentTransaction = true;
                 }else {
                     fragment = new StudentFragment();
-                    title = getString(R.string.student_nav);
+                    title = getString(R.string.nav_option_student);
                     fragmentTransaction = true;
                     fab = (RevealFAB) rootView.findViewById(R.id.fabNewStudent);
                 }
                 if(fragmentTransaction) {
                     ((MainActivity)getActivity()).replaceFragment(fragment, title);
+                    fragmentTransaction=false;
                 }
             }
         });

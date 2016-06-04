@@ -32,7 +32,7 @@
                 android:id="@+id/txt_nick_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/nick_hint" />
+                android:hint="@string/register.nick.hint" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -47,18 +47,25 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/contrasena_hint"
+                android:hint="@string/register.password.hint"
                 android:id="@+id/txt_contrasena_login"
                 android:inputType="textPassword" />
 
         </android.support.design.widget.TextInputLayout>
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login.option.signin"
+            android:id="@+id/btn_signin"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/sign_in"
-            android:id="@+id/btn_signin"
+            android:text="@string/login.option.register"
+            android:id="@+id/btn_signup"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />
     </RelativeLayout>

@@ -14,7 +14,7 @@ import com.android.volley.toolbox.Volley;
  */
 public class WebService {
 
-    public static String server = "http://academiccontrol-64005.onmodulus.net/api/";
+    public static String server = "192.168.1.100:3000/api/";
     //"https://sleepy-caverns-10999.herokuapp.com/api/";
     public static String usuarios = server + "usuario";
     public static String autenticar = server + "usuario/autenticar";

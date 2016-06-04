@@ -4,37 +4,26 @@
         <item
             android:id="@+id/menu_users"
             android:icon="@mipmap/ic_student_menu"
-            android:title="@string/usuario"/>
-        <item
-            android:id="@+id/menu_student"
-            android:icon="@mipmap/ic_student_menu"
-            android:title="@string/student_nav" />
-        <item
-            android:id="@+id/menu_teacher"
-            android:icon="@mipmap/ic_student_menu"
-            android:title="@string/teacher_nav" />
+            android:title="@string/nav.option.people"/>
+
         <item
             android:id="@+id/menu_grades"
             android:icon="@drawable/ic_menu"
-            android:title="@string/seccion_1"/>
+            android:title="@string/nav.option.grades"/>
         <item
             android:id="@+id/menu_plan"
             android:icon="@drawable/ic_menu"
-            android:title="@string/seccion_2"/>
+            android:title="@string/nav.option.plan"/>
     </group>
 
     <item
         android:id="@+id/navigation_subheader"
-        android:title="@string/otras_opciones">
+        android:title="@string/nav.option.other">
         <menu>
-            <item
-                android:id="@+id/menu_reg_option"
-                android:icon="@mipmap/ic_reg_user"
-                android:title="@string/reg_usr" />
             <item
                 android:id="@+id/menu_login_option"
                 android:icon="@mipmap/ic_login_option"
-                android:title="@string/login_option_menu" />
+                android:title="@string/nav.option.signin" />
         </menu>
     </item>
 </menu>
