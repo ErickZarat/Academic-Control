@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:fab_color="@color/colorAccent"
-        app:fab_icon="@mipmap/ic_reg_user"
+        app:fab_icon="@drawable/ic_person_add"
         app:reveal_color="@color/colorAccent"
         app:elevation="6dp"
         app:pressedTranslationZ="12dp"/>

@@ -36,8 +36,8 @@ public class UserFragment extends Fragment {
 
         AHBottomNavigation bottomNavigation = (AHBottomNavigation) rootView.findViewById(R.id.bottom_navigation);
 
-        AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.nav_option_teacher, R.mipmap.ic_student_menu, R.color.nav_color1);
-        AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.nav_option_student, R.mipmap.ic_student_menu, R.color.nav_color2);
+        AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.nav_option_teacher, R.drawable.ic_people, R.color.nav_color1);
+        AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.nav_option_student, R.drawable.ic_people, R.color.nav_color2);
 
         bottomNavigation.addItem(item1);
         bottomNavigation.addItem(item2);

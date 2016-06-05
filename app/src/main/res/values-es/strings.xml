@@ -29,6 +29,9 @@
     <string name="login.option.register">Registrarse</string>
     <string name="login.option.signin">Iniciar Sesion</string>
 	<string name="nav.option.plan">Plan</string>
+    <string name="nav.option.signout">Sign Out</string>
+    <string name="register.member.label">Already a member? Login</string>
+    <string name="register.create.button">Create Account</string>
 
 
 </resources>

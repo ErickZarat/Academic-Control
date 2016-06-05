@@ -37,4 +37,6 @@ dependencies {
 
     compile "com.jakewharton:butterknife:$rootProject.ext.butterKnifeVersion"
 
+    compile 'com.facebook.android:facebook-android-sdk:[4,5)'
+
 }

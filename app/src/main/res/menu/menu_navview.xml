@@ -3,16 +3,16 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/menu_users"
-            android:icon="@mipmap/ic_student_menu"
+            android:icon="@drawable/ic_people"
             android:title="@string/nav.option.people"/>
 
         <item
             android:id="@+id/menu_grades"
-            android:icon="@drawable/ic_menu"
+            android:icon="@drawable/ic_grades"
             android:title="@string/nav.option.grades"/>
         <item
             android:id="@+id/menu_plan"
-            android:icon="@drawable/ic_menu"
+            android:icon="@drawable/ic_plan"
             android:title="@string/nav.option.plan"/>
     </group>
 
@@ -22,8 +22,8 @@
         <menu>
             <item
                 android:id="@+id/menu_login_option"
-                android:icon="@mipmap/ic_login_option"
-                android:title="@string/nav.option.signin" />
+                android:icon="@drawable/ic_power"
+                android:title="@string/nav.option.signout" />
         </menu>
     </item>
 </menu>

@@ -5,6 +5,7 @@ package org.erickzarat.academiccontrol.activity;
  */
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -18,6 +19,7 @@ import android.view.MenuItem;
 import org.erickzarat.academiccontrol.R;
 import org.erickzarat.academiccontrol.fragment.GradeFragment;
 import org.erickzarat.academiccontrol.fragment.UserFragment;
+import org.erickzarat.academiccontrol.helper.DatabaseHelper;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -84,6 +86,10 @@ public class MainActivity extends AppCompatActivity {
                                 fragmentTransaction = true;
                                 break;
                             case R.id.menu_login_option:
+                                DatabaseHelper dbHelper = new DatabaseHelper(getApplicationContext(),"Utilities", null, 1);
+                                SQLiteDatabase db = dbHelper.getWritableDatabase();
+                                db.execSQL("UPDATE Utilities SET value='false' WHERE name='logged'");
+                                db.close();
                                 Intent in = new Intent(MainActivity.this, LoginActivity.class);
                                 in.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(in);
