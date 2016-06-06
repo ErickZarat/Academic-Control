@@ -1,15 +1,14 @@
 package org.erickzarat.academiccontrol.activity;
 
 import android.app.ProgressDialog;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import android.content.Intent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -23,16 +22,18 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import org.erickzarat.academiccontrol.R;
 import org.erickzarat.academiccontrol.helper.DatabaseHelper;
+import org.erickzarat.academiccontrol.helper.EncryptHelper;
 import org.erickzarat.academiccontrol.helper.KeyboardHelper;
+import org.erickzarat.academiccontrol.helper.WebServiceHelper;
 import org.erickzarat.academiccontrol.model.Rol;
 import org.erickzarat.academiccontrol.model.Usuario;
-import org.erickzarat.academiccontrol.volley.WebService;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
+
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
 
@@ -67,11 +68,17 @@ public class LoginActivity extends AppCompatActivity {
                 startActivityForResult(intent, REQUEST_SIGNUP);
             }
         });
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
 
     public void login() {
         KeyboardHelper.getInstance().hideKeyboard(this);
         Log.d(TAG, "Login");
+
+        progressDialog = new ProgressDialog(LoginActivity.this,
+                R.style.AppTheme_Dark_Dialog);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Authenticating...");
 
         if (!validate()) {
             onLoginFailed();
@@ -80,10 +87,7 @@ public class LoginActivity extends AppCompatActivity {
 
         _loginButton.setEnabled(false);
 
-        progressDialog = new ProgressDialog(LoginActivity.this,
-                R.style.AppTheme_Dark_Dialog);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Authenticating...");
+
         progressDialog.show();
 
         final String email = _emailText.getText().toString();
@@ -95,7 +99,7 @@ public class LoginActivity extends AppCompatActivity {
                 new Runnable() {
                     public void run() {
                         // On complete call either onLoginSuccess or onLoginFailed
-                        if (validateUserData(usr)){
+                        if (validateUserData()){
                             onLoginSuccess();
                             // onLoginFailed();
                             progressDialog.dismiss();
@@ -145,7 +149,7 @@ public class LoginActivity extends AppCompatActivity {
         _loginButton.setEnabled(true);
     }
 
-    public boolean validate() {
+    public boolean validate() throws NullPointerException{
         boolean valid = true;
 
         String email = _emailText.getText().toString();
@@ -176,27 +180,25 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    public boolean validateUserData(Usuario usuario){
-
-        if(usr != null){
-            return true;
-        } else {
-            return false;
-        }
+    public boolean validateUserData(){
+        return (usr != null);
     }
 
     public void authUser(String nick, String contrasena) {
-        Map<String, String> usr = new HashMap<String, String>();
+        Map<String, String> usr = new HashMap<>();
         usr.put("nick", nick);
-        usr.put("contrasena", contrasena);
+        usr.put("contrasena", EncryptHelper.getInstance().MD5Encrypt(contrasena));
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, WebService.autenticar, new JSONObject(usr), new Response.Listener<JSONObject>() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,
+                WebServiceHelper.getInstance(getApplicationContext()).ROUTE_AUTENTICAR, new JSONObject(usr),
+                new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
                     if (response != null && response.getBoolean("login")){
                         Log.d("Data: ", "nombre: " + response.getString("nombre"));
-                        Toast.makeText(getApplicationContext(), "nombre: " + response.getString("nombre"), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "nombre: " + response.getString("nombre"),
+                                Toast.LENGTH_SHORT).show();
                         setUserData(new Usuario(
                                 response.getInt("idUsuario"),
                                 response.getString("nombre"),
@@ -221,6 +223,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        WebService.getInstance(LoginActivity.this).addToRequestQueue(request);
+        WebServiceHelper.getInstance(LoginActivity.this).addToRequestQueue(request);
     }
 }

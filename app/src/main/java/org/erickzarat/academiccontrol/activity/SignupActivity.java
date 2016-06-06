@@ -1,24 +1,37 @@
 package org.erickzarat.academiccontrol.activity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
-import android.util.Patterns;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import org.erickzarat.academiccontrol.R;
+import org.erickzarat.academiccontrol.helper.EncryptHelper;
+import org.erickzarat.academiccontrol.helper.KeyboardHelper;
+import org.erickzarat.academiccontrol.helper.WebServiceHelper;
 import org.erickzarat.academiccontrol.model.Rol;
 import org.erickzarat.academiccontrol.model.Usuario;
+import org.json.JSONObject;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SignupActivity extends AppCompatActivity {
+
     private static final String TAG = "SignupActivity";
+    private boolean requestOk = false;
     @Bind(R.id.txt_first_name)
     EditText txtFirstName;
     @Bind(R.id.txt_sec_name)
@@ -49,13 +62,19 @@ public class SignupActivity extends AppCompatActivity {
         linkLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Finish the registration screen and return to the Login activity
-                finish();
+                goBack();
             }
         });
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+    }
+
+    public void goBack(){
+        startActivity(new Intent(SignupActivity.this, LoginActivity.class));
+        this.finish();
     }
 
     public void signup() {
+        KeyboardHelper.getInstance().hideKeyboard(SignupActivity.this);
         Log.d(TAG, "Signup");
 
         if (!validate()) {
@@ -75,17 +94,22 @@ public class SignupActivity extends AppCompatActivity {
                 txtFirstName.getText().toString(),
                 txtSecName.getText().toString(),
                 txtNick.getText().toString(),
-                txtContrasena.getText().toString(),
-                new Rol(0,"Undefined"));
+                EncryptHelper.getInstance().MD5Encrypt(txtContrasena.getText().toString()),
+                new Rol(2,"Undefined"));
 
-        // TODO: Implement your own signup logic here.
+        registerUser(usr);
 
         new Handler().postDelayed(
                 new Runnable() {
                     public void run() {
                         // On complete call either onSignupSuccess or onSignupFailed
                         // depending on success
-                        onSignupSuccess();
+                        if (requestOk){
+                            onSignupSuccess();
+                        }else{
+                            onSignupFailed();
+                        }
+
                         // onSignupFailed();
                         progressDialog.dismiss();
                     }
@@ -96,11 +120,12 @@ public class SignupActivity extends AppCompatActivity {
     public void onSignupSuccess() {
         btnSignup.setEnabled(true);
         setResult(RESULT_OK, null);
-        finish();
+        Toast.makeText(getBaseContext(), "Sign up Success", Toast.LENGTH_LONG).show();
+        goBack();
     }
 
     public void onSignupFailed() {
-        Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseContext(), "Sign up failed", Toast.LENGTH_LONG).show();
 
         btnSignup.setEnabled(true);
     }
@@ -115,33 +140,66 @@ public class SignupActivity extends AppCompatActivity {
         String pass =txtContrasena.getText().toString();
 
         if (first.isEmpty() || first.length() < 3) {
-            txtFirstName.setError("at least 3 characters");
+            txtFirstName.setError(getString(R.string.character_error));
             valid = false;
         } else {
             txtFirstName.setError(null);
         }
 
         if (sec.isEmpty() || sec.length() < 3) {
-            txtSecName.setError("at least 3 characters");
+            txtSecName.setError(getString(R.string.character_error));
             valid = false;
         } else {
             txtSecName.setError(null);
         }
 
         if (nick.isEmpty() || nick.length() < 3) {
-            txtNick.setError("at least 3 characters");
+            txtNick.setError(getString(R.string.character_error));
             valid = false;
         } else {
             txtNick.setError(null);
         }
 
         if (pass.isEmpty() || pass.length() < 4 || pass.length() > 10) {
-            txtContrasena.setError("between 4 and 10 alphanumeric characters");
+            txtContrasena.setError(getString(R.string.password_error));
             valid = false;
         } else {
             txtContrasena.setError(null);
         }
 
         return valid;
+    }
+
+    public void registerUser(Usuario usuario) {
+        Map<String, String> usr = new HashMap<>();
+        usr.put("idUsuario", null);
+        usr.put("nombre", usuario.getNombre());
+        usr.put("apellido", usuario.getApellido());
+        usr.put("nick", usuario.getNick());
+        usr.put("contrasena", usuario.getContrasena());
+        usr.put("idRol", "" + usuario.getRol().getIdRol());
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,
+                WebServiceHelper.getInstance(SignupActivity.this).ROUTE_USUARIO, new JSONObject(usr),
+                new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    Toast.makeText(getApplicationContext(), "Mensaje: " + response.getString("Mensaje"),
+                            Toast.LENGTH_SHORT).show();
+                    requestOk = true;
+                } catch (Exception ex) {
+                    Log.e("Request Exception", ex.getMessage());
+                    Toast.makeText(getApplicationContext(), "Exception", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Error: Response ", error.getMessage());
+                Toast.makeText(getApplicationContext(), "Error Volley", Toast.LENGTH_SHORT).show();
+            }
+        });
+        WebServiceHelper.getInstance(SignupActivity.this).addToRequestQueue(request);
     }
 }

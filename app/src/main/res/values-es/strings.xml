@@ -11,6 +11,8 @@
     <string name="nav.option.signin">Login</string>
     <string name="nav.option.grades">Notas</string>
 	<string name="nav.option.people">Personas</string>
+    <string name="nav.option.plan">Planificacion</string>
+    <string name="nav.option.signout">Cerrar sesion</string>
 
     <!-- TOOLBAR OPTIONS MENU STRINGS -->
     <string name="menu.action.settings">Ajustes</string>
@@ -24,14 +26,15 @@
     <string name="register.password.hint">Contrasena</string>
     <string name="register.title">Registro de Usuario</string>
     <string name="register.role.hint">Rol</string>
+	<string name="register.member.label">Ya eres miembro? Inicia Sesion!</string>
+	<string name="register.create.button">Crear Cuenta</string>
 
     <!-- LOGIN OPTION STRINGS -->
     <string name="login.option.register">Registrarse</string>
     <string name="login.option.signin">Iniciar Sesion</string>
-	<string name="nav.option.plan">Plan</string>
-    <string name="nav.option.signout">Sign Out</string>
-    <string name="register.member.label">Already a member? Login</string>
-    <string name="register.create.button">Create Account</string>
 
-
+	<!-- DIALOG STRINGS -->
+	<string name="auth.dialog">Autenticando...</string>
+    <string name="signin.button">Sign In</string>
+    <string name="register.member.link">No account yet? Create one</string>
 </resources>

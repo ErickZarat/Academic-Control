@@ -20,9 +20,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.erickzarat.academiccontrol.R;
+import org.erickzarat.academiccontrol.helper.WebServiceHelper;
 import org.erickzarat.academiccontrol.model.Rol;
 import org.erickzarat.academiccontrol.model.Usuario;
-import org.erickzarat.academiccontrol.volley.WebService;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -39,7 +39,7 @@ public class UserRegistrationActivity extends AppCompatActivity {
     private Rol actualRol;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) throws NullPointerException {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_registration);
 
@@ -55,7 +55,7 @@ public class UserRegistrationActivity extends AppCompatActivity {
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v){
                 onBackPressed();
             }
         });
@@ -122,7 +122,7 @@ public class UserRegistrationActivity extends AppCompatActivity {
 
     public void registerUser(Usuario usuario) {
         final boolean requestOk = false;
-        Map<String, String> usr = new HashMap<String, String>();
+        Map<String, String> usr = new HashMap<>();
         usr.put("idUsuario", null);
         usr.put("nombre", usuario.getNombre());
         usr.put("apellido", usuario.getApellido());
@@ -130,23 +130,26 @@ public class UserRegistrationActivity extends AppCompatActivity {
         usr.put("contrasena", usuario.getContrasena());
         usr.put("idRol", "" + usuario.getRol().getIdRol());
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, "http://192.168.1.100:3000/api/usuario", new JSONObject(usr), new Response.Listener<JSONObject>() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,
+                WebServiceHelper.getInstance(UserRegistrationActivity.this).ROUTE_USUARIO, new JSONObject(usr),
+                new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    Toast.makeText(getApplicationContext(), "Mensaje: " + response.getString("Mensaje"), Toast.LENGTH_SHORT);
+                    Toast.makeText(getApplicationContext(), "Mensaje: " + response.getString("Mensaje"),
+                            Toast.LENGTH_SHORT).show();
                 } catch (Exception ex) {
                     Log.e("Request Exception", ex.getMessage());
-                    Toast.makeText(getApplicationContext(), "Eception", Toast.LENGTH_SHORT);
+                    Toast.makeText(getApplicationContext(), "Eception", Toast.LENGTH_SHORT).show();
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.d("Error: Response ", error.getMessage());
-                Toast.makeText(getApplicationContext(), "Error Volley", Toast.LENGTH_SHORT);
+                Toast.makeText(getApplicationContext(), "Error Volley", Toast.LENGTH_SHORT).show();
             }
         });
-        WebService.getInstance(UserRegistrationActivity.this).addToRequestQueue(request);
+        WebServiceHelper.getInstance(UserRegistrationActivity.this).addToRequestQueue(request);
     }
 }

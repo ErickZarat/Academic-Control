@@ -11,6 +11,8 @@
 	<string name="nav.menu.signin">Login</string>
 	<string name="nav.option.grades">Grades</string>
 	<string name="nav.option.people">People</string>
+	<string name="nav.option.plan">Plan</string>
+	<string name="nav.option.signout">Sign Out</string>
 
 	<!-- TOOLBAR OPTIONS MENU STRINGS -->
 	<string name="menu.action.settings">Settings</string>
@@ -24,12 +26,20 @@
 	<string name="register.password.hint">Password</string>
 	<string name="register.title">Register User</string>
 	<string name="register.role.hint">Role</string>
+	<string name="register.member.label">Already a member? Login</string>
+	<string name="register.create.button">Create Account</string>
 
 	<!-- LOGIN OPTION STRINGS -->
 	<string name="login.option.register">Sign Up</string>
 	<string name="login.option.signin">Sign In</string>
-	<string name="nav.option.plan">Plan</string>
-	<string name="nav.option.signout">Sign Out</string>
-	<string name="register.member.label">Already a member? Login</string>
-	<string name="register.create.button">Create Account</string>
+
+	<!-- DIALOG STRINGS -->
+	<string name="auth.dialog">Autheticanting...</string>
+
+	<!-- ERROR STRINGS -->
+	<string name="password.error">between 4 and 10 alphanumeric characters</string>
+	<string name="character.error">at least 3 characters</string>
+	<string name="signin.button">Sign In</string>
+	<string name="register.member.link">No account yet? Create one</string>
+
 </resources>
