@@ -1,12 +1,13 @@
 package org.erickzarat.academiccontrol.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 /**
  * Created by erick on 28/05/16.
  */
-public class Actividad {
+public class Actividad  implements Serializable {
 
     private int idActividad;
     private String contenido;
@@ -33,6 +34,18 @@ public class Actividad {
         this.logro = logro;
         this.planificacion = planificacion;
         this.notas = notas;
+    }
+
+    public Actividad(int idActividad, String contenido, Date fechaInicial, Date fechaFinal, String materiales, String tareas, int ponderacion, String logro, Planificacion planificacion) {
+        this.idActividad = idActividad;
+        this.contenido = contenido;
+        this.fechaInicial = fechaInicial;
+        this.fechaFinal = fechaFinal;
+        this.materiales = materiales;
+        this.tareas = tareas;
+        this.ponderacion = ponderacion;
+        this.logro = logro;
+        this.planificacion = planificacion;
     }
 
     public List<Nota> getNotas() {

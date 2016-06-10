@@ -7,12 +7,12 @@
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom" />
+        android:layout_gravity="bottom"/>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="50dp"
-        android:id="@+id/frame_navigation"></FrameLayout>
+        android:id="@+id/frame_navigation"/>
 
 </android.support.design.widget.CoordinatorLayout>

@@ -22,7 +22,7 @@ public class WebServiceHelper {
         return instance;
     }
 
-    public final String SERVER =  "http://192.168.64.12:3000/api/";
+    public final String SERVER =  "http://192.168.64.100:3000/api/";
 
     public final String ROUTE_PROFESOR = SERVER + "profesor";
     public final String ROUTE_ALUMNO = SERVER + "alumno";
@@ -30,7 +30,7 @@ public class WebServiceHelper {
     public final String ROUTE_GRADO = SERVER + "grado";
     public final String ROUTE_SECCION = SERVER + "seccion";
     public final String ROUTE_USUARIO = SERVER + "usuario";
-    public final String ROUTE_AUTENTICAR = SERVER + ROUTE_USUARIO + "/autenticar";
+    public final String ROUTE_AUTENTICAR = ROUTE_USUARIO + "/autenticar";
     public final String ROUTE_NOTA = SERVER + "nota";
     public final String ROUTE_PLANIFICACION = SERVER + "planificacion";
     public final String ROUTE_ACTIVIDAD = SERVER + "actividad";

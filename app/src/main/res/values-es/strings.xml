@@ -37,4 +37,9 @@
 	<string name="auth.dialog">Autenticando...</string>
     <string name="signin.button">Sign In</string>
     <string name="register.member.link">No account yet? Create one</string>
+    <string name="activity.content.hint">Contenido</string>
+    <string name="activity.materiales.hint">Materiales</string>
+    <string name="activity.tarea.hint">Tarea</string>
+    <string name="activity.ponderacion.hint">Ponderacion</string>
+    <string name="activity.Logro.hint">Logro</string>
 </resources>

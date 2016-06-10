@@ -48,7 +48,7 @@ public class SplashScreenActivity extends Activity {
                 boolean logged = getLoggedvalue();
                 Log.e("LOGGED =============", String.valueOf(logged));
                 Intent intent = null;
-                if (logged != true) {
+                if (!logged) {
                     intent = new Intent(SplashScreenActivity.this, LoginActivity.class);
                 } else {
                     intent = new Intent(SplashScreenActivity.this, MainActivity.class);

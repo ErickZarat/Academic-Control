@@ -20,15 +20,15 @@
 		</android.support.v7.widget.RecyclerView>
 
 	</android.support.v4.widget.SwipeRefreshLayout>
-
+<!--
 	<com.sergiocasero.revealfab.RevealFAB
 		android:id="@+id/fabNewPlan"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		app:fab_color="@color/colorAccent"
-		app:fab_icon="@@drawable/ic_person_add"
+		app:fab_icon="@drawable/ic_person_add"
 		app:reveal_color="@color/colorAccent"
 		app:elevation="6dp"
 		app:pressedTranslationZ="12dp" />
-
+-->
 </FrameLayout>

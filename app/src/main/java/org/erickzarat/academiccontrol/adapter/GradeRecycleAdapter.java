@@ -10,6 +10,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import org.erickzarat.academiccontrol.R;
 import org.erickzarat.academiccontrol.model.Nota;
+
 import java.util.List;
 
 /**
@@ -27,7 +28,7 @@ public class GradeRecycleAdapter extends RecyclerView.Adapter<GradeRecycleAdapte
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.people_item_row, parent, false);
+                .inflate(R.layout.grade_item_row, parent, false);
         return new ViewHolder(view);
     }
 
@@ -41,39 +42,44 @@ public class GradeRecycleAdapter extends RecyclerView.Adapter<GradeRecycleAdapte
         return this.dataset.size();
     }
 
-    public void clear(){
+    public void clear() {
         dataset.clear();
         notifyDataSetChanged();
     }
 
-    public void add (Nota nota){
+    public void add(Nota nota) {
         dataset.add(0, nota);
         notifyDataSetChanged();
     }
 
-    public void update(List<Nota> grades){
+    public void update(List<Nota> grades) {
         dataset.clear();
         dataset.addAll(grades);
         notifyDataSetChanged();
     }
 
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
-        @Bind(R.id.tvIdPersona)
-        TextView tvIdPersona;
-        @Bind(R.id.tvName)
-        TextView tvName;
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        @Bind(R.id.txtPonderacion)
+        TextView txtPonderacion;
+        @Bind(R.id.txtTarea)
+        TextView txtTarea;
+        @Bind(R.id.txtNick)
+        TextView txtNick;
+        @Bind(R.id.txtNota)
+        TextView txtNota;
+
 
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            //tvIdPersona = (TextView) itemView.findViewById(R.id.tvIdPersona);
-            //tvName = (TextView) itemView.findViewById(R.id.tvName);
         }
 
-        public void setData(Nota nota){
-            tvName.setText(String.valueOf(nota.getPunteo()));
-            tvIdPersona.setText(String.valueOf(nota.getIdNota()));
+        public void setData(Nota nota) {
+            txtNick.setText(nota.getAlumno().getNick());
+            txtNota.setText("Obtenido:"+String.valueOf(nota.getPunteo()));
+            txtPonderacion.setText("Total:"+String.valueOf(nota.getActividad().getPonderacion()));
+            txtTarea.setText(nota.getActividad().getTareas());
         }
     }
 }

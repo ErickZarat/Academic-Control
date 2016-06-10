@@ -20,9 +20,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.sergiocasero.revealfab.RevealFAB;
 import org.erickzarat.academiccontrol.R;
+import org.erickzarat.academiccontrol.activity.TeacherActivity;
 import org.erickzarat.academiccontrol.activity.UserRegistrationActivity;
-import org.erickzarat.academiccontrol.adapter.PeopleRecycleAdapter;
+import org.erickzarat.academiccontrol.adapter.TeacherRecycleAdapter;
 import org.erickzarat.academiccontrol.app.Aplication;
+import org.erickzarat.academiccontrol.helper.WebServiceHelper;
+import org.erickzarat.academiccontrol.interfaces.OnTeacherClickListener;
 import org.erickzarat.academiccontrol.model.Profesor;
 import org.erickzarat.academiccontrol.model.Rol;
 import org.erickzarat.academiccontrol.model.Usuario;
@@ -33,7 +36,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TeacherFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+public class TeacherFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, OnTeacherClickListener {
 
     @Bind(R.id.recycle_teachers)
     RecyclerView recycleTeachers;
@@ -43,11 +46,11 @@ public class TeacherFragment extends Fragment implements SwipeRefreshLayout.OnRe
     RevealFAB fabNewTeacher;
 
     //api request elements
-    private String TAG = StudentFragment.class.getSimpleName();
-    private String URL = "http://192.168.64.13:3000/api/profesor";
+    private String TAG = TeacherFragment.class.getSimpleName();
+    private String URL = null;
 
-    private List<Usuario> teachers;
-    PeopleRecycleAdapter adapter;
+    private List<Profesor> teachers;
+    TeacherRecycleAdapter adapter;
 
     public TeacherFragment() {
     }
@@ -58,8 +61,8 @@ public class TeacherFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
         View view = inflater.inflate(R.layout.fragment_teacher, container, false);
         ButterKnife.bind(this, view);
-
-        teachers = new ArrayList<Usuario>();
+        URL = WebServiceHelper.getInstance(getActivity().getApplicationContext()).ROUTE_PROFESOR;
+        teachers = new ArrayList<Profesor>();
         initAdapter();
         initRecyclerView();
 
@@ -98,7 +101,7 @@ public class TeacherFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
     private void initAdapter() {
         if (adapter == null){
-            adapter = new PeopleRecycleAdapter(getActivity().getApplicationContext(), teachers);
+            adapter = new TeacherRecycleAdapter(getActivity().getApplicationContext(), teachers, this);
         }
     }
 
@@ -141,19 +144,16 @@ public class TeacherFragment extends Fragment implements SwipeRefreshLayout.OnRe
             @Override
             public void onResponse(JSONArray response) {
                 if (response.length() > 0) {
-                    ArrayList<Usuario> temp = new ArrayList<Usuario>();
+                    ArrayList<Profesor> temp = new ArrayList<Profesor>();
                     for (int i = 0; i < response.length(); i++) {
                         try {
                             JSONObject personaJson = response.getJSONObject(i);
 
-                            int idPersona = personaJson.getInt("idUsuario");
-                            String name = personaJson.getString("nombre");
-                            String email = personaJson.getString("apellido");
-
-                            Usuario persona = new Usuario();
-                            persona.setIdUsuario(idPersona);
-                            persona.setNombre(name);
-                            persona.setApellido(email);
+                            Profesor persona = new Profesor();
+                            persona.setIdUsuario(personaJson.getInt("idUsuario"));
+                            persona.setNombre(personaJson.getString("nombre"));
+                            persona.setApellido(personaJson.getString("apellido"));
+                            persona.setNick(personaJson.getString("nick"));
                             temp.add(0, persona);
 
                         } catch (JSONException ex) {
@@ -185,5 +185,13 @@ public class TeacherFragment extends Fragment implements SwipeRefreshLayout.OnRe
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+    }
+
+    @Override
+    public void onUserItemClick(Profesor profesor) {
+        Toast.makeText(getActivity().getApplicationContext(), profesor.getNombre(),Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getActivity(), TeacherActivity.class);
+        intent.putExtra("TEACHER", profesor);
+        getActivity().startActivity(intent);
     }
 }

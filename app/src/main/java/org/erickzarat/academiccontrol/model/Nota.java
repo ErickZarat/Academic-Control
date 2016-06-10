@@ -1,9 +1,11 @@
 package org.erickzarat.academiccontrol.model;
 
+import java.io.Serializable;
+
 /**
  * Created by erick on 28/05/16.
  */
-public class Nota {
+public class Nota  implements Serializable {
 
     private int idNota;
     private int punteo;

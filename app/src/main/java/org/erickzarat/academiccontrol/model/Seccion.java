@@ -1,11 +1,12 @@
 package org.erickzarat.academiccontrol.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by erick on 28/05/16.
  */
-public class Seccion {
+public class Seccion implements Serializable {
 
     private int idSeccion;
     private String nombreSeccion;
@@ -19,6 +20,11 @@ public class Seccion {
 
     public Seccion() {
 
+    }
+
+    public Seccion(int idSeccion, String nombreSeccion) {
+        this.idSeccion = idSeccion;
+        this.nombreSeccion = nombreSeccion;
     }
 
     public int getIdSeccion() {

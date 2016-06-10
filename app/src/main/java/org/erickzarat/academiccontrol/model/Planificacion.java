@@ -1,11 +1,12 @@
 package org.erickzarat.academiccontrol.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by erick on 28/05/16.
  */
-public class Planificacion {
+public class Planificacion implements Serializable {
 
     private int idPlanificacion;
     private Bimestre bimestre;
@@ -18,14 +19,13 @@ public class Planificacion {
     public Planificacion() {
     }
 
-    public Planificacion(int idPlanificacion, Bimestre bimestre, Profesor profesor, Materia materia, Grado grado, String competencia, List<Actividad> actividades) {
+    public Planificacion(int idPlanificacion, Bimestre bimestre, Profesor profesor, Materia materia, Grado grado, String competencia) {
         this.idPlanificacion = idPlanificacion;
         this.bimestre = bimestre;
         this.profesor = profesor;
         this.materia = materia;
         this.grado = grado;
         this.competencia = competencia;
-        this.actividades = actividades;
     }
 
     public int getIdPlanificacion() {

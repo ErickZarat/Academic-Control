@@ -71,7 +71,7 @@ public class UserFragment extends Fragment {
                     fragment = new StudentFragment();
                     title = getString(R.string.nav_option_student);
                     fragmentTransaction = true;
-                    fab = (RevealFAB) rootView.findViewById(R.id.fabNewStudent);
+                     fab = (RevealFAB) rootView.findViewById(R.id.fabNewStudent);
                 }
                 if(fragmentTransaction) {
                     ((MainActivity)getActivity()).replaceFragment(fragment, title);

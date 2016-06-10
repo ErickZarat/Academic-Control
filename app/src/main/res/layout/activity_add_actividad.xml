@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+	tools:context="org.erickzarat.academiccontrol.activity.AddActivity">
+
+	<android.support.v7.widget.Toolbar
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		android:id="@+id/appbar"
+		android:layout_height="?attr/actionBarSize"
+		android:layout_width="match_parent"
+		android:minHeight="?attr/actionBarSize"
+		android:background="?attr/colorPrimary"
+		android:elevation="4dp"
+		android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+		app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+	<ScrollView
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_margin="@dimen/activity_horizontal_margin">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
+
+			<android.support.design.widget.TextInputLayout
+				android:layout_height="wrap_content"
+				android:layout_width="match_parent">
+				<EditText
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:hint="@string/activity.content.hint"
+					android:inputType="textMultiLine"
+					android:id="@+id/txtContent"/>
+			</android.support.design.widget.TextInputLayout>
+
+			<android.support.design.widget.TextInputLayout
+				android:layout_height="wrap_content"
+				android:layout_width="match_parent">
+				<EditText
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:hint="@string/activity.materiales.hint"
+					android:inputType="textMultiLine"
+					android:id="@+id/txtMateriales"/>
+			</android.support.design.widget.TextInputLayout>
+
+			<android.support.design.widget.TextInputLayout
+				android:layout_height="wrap_content"
+				android:layout_width="match_parent">
+				<EditText
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:hint="@string/activity.tarea.hint"
+					android:inputType="textMultiLine"
+					android:id="@+id/txtTarea"/>
+			</android.support.design.widget.TextInputLayout>
+
+			<android.support.design.widget.TextInputLayout
+				android:layout_height="wrap_content"
+				android:layout_width="match_parent">
+				<EditText
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:hint="@string/activity.ponderacion.hint"
+					android:inputType="textMultiLine"
+					android:id="@+id/txtPonderacion"/>
+			</android.support.design.widget.TextInputLayout>
+
+			<android.support.design.widget.TextInputLayout
+				android:layout_height="wrap_content"
+				android:layout_width="match_parent">
+				<EditText
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:hint="@string/activity.Logro.hint"
+					android:inputType="textMultiLine"
+					android:id="@+id/txtLogro"/>
+			</android.support.design.widget.TextInputLayout>
+
+			<DatePicker
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:id="@+id/datePicker"
+				android:layout_gravity="center_horizontal"/>
+		</LinearLayout>
+
+	</ScrollView>
+</LinearLayout>

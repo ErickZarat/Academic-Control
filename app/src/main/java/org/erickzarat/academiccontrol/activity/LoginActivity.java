@@ -209,6 +209,7 @@ public class LoginActivity extends AppCompatActivity {
                         ), true);
                     }else {
                         setUserData(null, false);
+                        Toast.makeText(getApplicationContext(), "Este usuario no esta registrado", Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception ex) {
                     Log.e("Request Exception", ex.getMessage());
@@ -217,7 +218,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         }, new Response.ErrorListener() {
             @Override
-            public void onErrorResponse(VolleyError error) {
+            public void onErrorResponse(VolleyError error) throws NullPointerException{
                 Log.d("Error: Response ", error.getMessage());
                 Toast.makeText(getApplicationContext(), "Error Volley", Toast.LENGTH_SHORT).show();
             }

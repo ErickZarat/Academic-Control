@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+	android:theme="@style/AppTheme.DarkAccent"
+	android:background="@color/colorAccent"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	tools:context="org.erickzarat.academiccontrol.activity.AddActivity">
+
+	<android.support.v7.widget.Toolbar
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		android:id="@+id/appbar"
+		android:layout_height="?attr/actionBarSize"
+		android:layout_width="match_parent"
+		android:minHeight="?attr/actionBarSize"
+		android:background="?attr/colorPrimary"
+		android:elevation="4dp"
+		android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+		app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+	<ScrollView
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_margin="@dimen/activity_horizontal_margin">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
+
+			<fr.ganfra.materialspinner.MaterialSpinner
+				android:id="@+id/spinBim"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				app:ms_multiline="false"
+				app:ms_hint="Bimestre"
+				app:ms_enableFloatingLabel="true"
+				app:ms_enableErrorLabel="false"
+				app:ms_floatingLabelText="Bimestre"
+				app:ms_baseColor="@color/base"
+				app:ms_highlightColor="@color/colorPrimary"
+				app:ms_thickness="2dp"
+				app:ms_hintColor="@color/iron"
+				app:ms_arrowColor="@color/iron"
+				app:ms_arrowSize="16dp"
+				app:ms_alignLabels="false"
+				app:ms_floatingLabelColor="@color/iron"/>
+
+			<fr.ganfra.materialspinner.MaterialSpinner
+				android:id="@+id/spinMateria"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				app:ms_multiline="false"
+				app:ms_hint="Grado"
+				app:ms_enableFloatingLabel="true"
+				app:ms_enableErrorLabel="false"
+				app:ms_floatingLabelText="Grado"
+				app:ms_baseColor="@color/base"
+				app:ms_highlightColor="@color/colorPrimary"
+				app:ms_thickness="2dp"
+				app:ms_hintColor="@color/iron"
+				app:ms_arrowColor="@color/iron"
+				app:ms_arrowSize="16dp"
+				app:ms_alignLabels="false"
+				app:ms_floatingLabelColor="@color/iron"/>
+
+			<fr.ganfra.materialspinner.MaterialSpinner
+				android:id="@+id/spinGrado"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				app:ms_multiline="false"
+				app:ms_hint="Grado"
+				app:ms_enableFloatingLabel="true"
+				app:ms_enableErrorLabel="false"
+				app:ms_floatingLabelText="Grado"
+				app:ms_baseColor="@color/base"
+				app:ms_highlightColor="@color/colorPrimary"
+				app:ms_thickness="2dp"
+				app:ms_hintColor="@color/iron"
+				app:ms_arrowColor="@color/iron"
+				app:ms_arrowSize="16dp"
+				app:ms_alignLabels="false"
+				app:ms_floatingLabelColor="@color/iron"/>
+
+			<android.support.design.widget.TextInputLayout
+				android:layout_height="wrap_content"
+				android:layout_width="match_parent">
+				<EditText
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:hint="Competencia"
+					android:inputType="textMultiLine"
+					android:id="@+id/txtCompetencia"/>
+			</android.support.design.widget.TextInputLayout>
+		</LinearLayout>
+
+	</ScrollView>
+</LinearLayout>

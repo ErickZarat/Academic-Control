@@ -1,9 +1,11 @@
 package org.erickzarat.academiccontrol.model;
 
+import java.io.Serializable;
+
 /**
  * Created by erick on 25/05/16.
  */
-public class Usuario {
+public class Usuario implements Serializable {
 
     private int idUsuario;
     private String nombre;

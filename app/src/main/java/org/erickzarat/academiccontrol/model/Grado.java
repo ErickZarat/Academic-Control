@@ -1,16 +1,22 @@
 package org.erickzarat.academiccontrol.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by erick on 28/05/16.
  */
-public class Grado {
+public class Grado  implements Serializable {
     private int idGrado;
     private String nombreGrado;
     private List<Alumno> alumnos;
 
     public Grado() {
+    }
+
+    public Grado(int idGrado, String nombreGrado) {
+        this.idGrado = idGrado;
+        this.nombreGrado = nombreGrado;
     }
 
     public Grado(int idGrado, String nombreGrado, List<Alumno> alumnos) {

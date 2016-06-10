@@ -25,13 +25,13 @@ import org.erickzarat.academiccontrol.helper.WebServiceHelper;
 import org.erickzarat.academiccontrol.model.Rol;
 import org.erickzarat.academiccontrol.model.Usuario;
 import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class SignupActivity extends AppCompatActivity {
 
     private static final String TAG = "SignupActivity";
-    private boolean requestOk = false;
     @Bind(R.id.txt_first_name)
     EditText txtFirstName;
     @Bind(R.id.txt_sec_name)
@@ -44,6 +44,7 @@ public class SignupActivity extends AppCompatActivity {
     AppCompatButton btnSignup;
     @Bind(R.id.link_login)
     TextView linkLogin;
+    private boolean requestOk = false;
 
 
     @Override
@@ -62,13 +63,15 @@ public class SignupActivity extends AppCompatActivity {
         linkLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goBack();
+                // Finish the registration screen and return to the Login activity
+                finish();
             }
         });
+
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
 
-    public void goBack(){
+    public void goBack() {
         startActivity(new Intent(SignupActivity.this, LoginActivity.class));
         this.finish();
     }
@@ -95,7 +98,7 @@ public class SignupActivity extends AppCompatActivity {
                 txtSecName.getText().toString(),
                 txtNick.getText().toString(),
                 EncryptHelper.getInstance().MD5Encrypt(txtContrasena.getText().toString()),
-                new Rol(2,"Undefined"));
+                new Rol(2, "Undefined"));
 
         registerUser(usr);
 
@@ -104,9 +107,9 @@ public class SignupActivity extends AppCompatActivity {
                     public void run() {
                         // On complete call either onSignupSuccess or onSignupFailed
                         // depending on success
-                        if (requestOk){
+                        if (requestOk) {
                             onSignupSuccess();
-                        }else{
+                        } else {
                             onSignupFailed();
                         }
 
@@ -137,7 +140,7 @@ public class SignupActivity extends AppCompatActivity {
         String first = txtFirstName.getText().toString();
         String sec = txtSecName.getText().toString();
         String nick = txtNick.getText().toString();
-        String pass =txtContrasena.getText().toString();
+        String pass = txtContrasena.getText().toString();
 
         if (first.isEmpty() || first.length() < 3) {
             txtFirstName.setError(getString(R.string.character_error));
@@ -182,18 +185,18 @@ public class SignupActivity extends AppCompatActivity {
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,
                 WebServiceHelper.getInstance(SignupActivity.this).ROUTE_USUARIO, new JSONObject(usr),
                 new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    Toast.makeText(getApplicationContext(), "Mensaje: " + response.getString("Mensaje"),
-                            Toast.LENGTH_SHORT).show();
-                    requestOk = true;
-                } catch (Exception ex) {
-                    Log.e("Request Exception", ex.getMessage());
-                    Toast.makeText(getApplicationContext(), "Exception", Toast.LENGTH_SHORT).show();
-                }
-            }
-        }, new Response.ErrorListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            Toast.makeText(getApplicationContext(), "Mensaje: " + response.getString("Mensaje"),
+                                    Toast.LENGTH_SHORT).show();
+                            requestOk = true;
+                        } catch (Exception ex) {
+                            Log.e("Request Exception", ex.getMessage());
+                            Toast.makeText(getApplicationContext(), "Exception", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.d("Error: Response ", error.getMessage());

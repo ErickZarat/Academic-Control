@@ -2,12 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="org.erickzarat.academiccontrol">
 
-	<uses-permission android:name="android.permission.INTERNET" />
-	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-	<uses-permission android:name="android.permission.GET_ACCOUNTS" />
+	<uses-permission android:name="android.permission.INTERNET"/>
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+	<uses-permission android:name="android.permission.GET_ACCOUNTS"/>
 	<uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
-	<uses-permission android:name="android.permission.NETWORK" />
-	<uses-permission android:name="android.permission.USE_CREDENTIALS" />
+	<uses-permission android:name="android.permission.NETWORK"/>
+	<uses-permission android:name="android.permission.USE_CREDENTIALS"/>
+	<uses-permission android:name="android.permission.WAKE_LOCK"/>
 
 	<application
 		android:name=".app.Aplication"
@@ -16,20 +17,17 @@
 		android:label="@string/app_name"
 		android:supportsRtl="true"
 		android:theme="@style/AppTheme">
-
 		<activity
-			android:name="org.erickzarat.academiccontrol.activity.SplashScreenActivity"
+			android:name=".activity.SplashScreenActivity"
 			android:label="@string/app_name"
 			android:theme="@style/AppTheme.Dark">
 			<intent-filter>
-				<action android:name="android.intent.action.MAIN" />
+				<action android:name="android.intent.action.MAIN"/>
 
-				<category android:name="android.intent.category.LAUNCHER" />
+				<category android:name="android.intent.category.LAUNCHER"/>
 			</intent-filter>
 		</activity>
-
-		<activity
-			android:name=".activity.MainActivity"/>
+		<activity android:name=".activity.MainActivity"/>
 		<activity
 			android:name=".activity.LoginActivity"
 			android:theme="@style/AppTheme.Dark"/>
@@ -38,6 +36,25 @@
 		<activity
 			android:name=".activity.SignupActivity"
 			android:theme="@style/AppTheme.Dark"/>
+
+		<receiver android:name=".helper.NotificationHelper"/>
+
+		<activity android:name=".activity.PlanDetailActivity">
+		</activity>
+		<activity
+			android:name=".activity.AddActivity"
+			android:theme="@style/AppTheme.DarkAccent">
+		</activity>
+		<activity android:name=".activity.ActividadDetails">
+		</activity>
+		<activity android:name=".activity.TeacherActivity">
+		</activity>
+		<activity
+			android:name=".activity.AddPlan"
+			android:theme="@style/AppTheme.DarkAccent">
+		</activity>
+		<activity android:name=".activity.Calificar">
+		</activity>
 	</application>
 
 </manifest>

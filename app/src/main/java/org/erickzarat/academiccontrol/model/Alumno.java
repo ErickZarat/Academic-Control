@@ -1,11 +1,12 @@
 package org.erickzarat.academiccontrol.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by erick on 28/05/16.
  */
-public class Alumno extends Usuario {
+public class Alumno extends Usuario implements Serializable {
 
     private Grado grado;
     private Seccion seccion;
