@@ -79,6 +79,7 @@ public class Calificar extends AppCompatActivity implements OnStudentClickListen
         appbar.setSubtitle("Notas");
         Actividad actividad = (Actividad) getIntent().getSerializableExtra("ACTIVIDAD");
         idActiv = actividad.getIdActividad();
+        txtTarea.setText(actividad.getTareas());
         initAdapter();
         initRecyclerView();
     }
